@@ -1,11 +1,16 @@
 import { PrismaClient } from "@prisma/client";
+import { PrismaLibSQL } from "@prisma/adapter-libsql";
 import bcrypt from "bcryptjs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { generateProductArtSvg } from "../lib/placeholder-art";
 import { createSimplePdf } from "../lib/pdf";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaLibSQL({
+  url: process.env.TURSO_DATABASE_URL!,
+  authToken: process.env.TURSO_AUTH_TOKEN,
+});
+const prisma = new PrismaClient({ adapter });
 
 const UPLOAD_PRODUCTS_DIR = path.join(process.cwd(), "public", "uploads", "products");
 const UPLOAD_DOCUMENTS_DIR = path.join(process.cwd(), "public", "uploads", "documents");
