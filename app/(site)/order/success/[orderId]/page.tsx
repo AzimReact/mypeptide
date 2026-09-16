@@ -45,10 +45,10 @@ export default async function OrderSuccessPage(
         <OrderDetailsCard order={order} />
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="lg" className="flex-1">
+          <Button asChild size="lg" className="sm:flex-1">
             <Link href="/shop">Continue Shopping</Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="flex-1">
+          <Button asChild variant="outline" size="lg" className="sm:flex-1">
             <Link href="/track-order">Track This Order</Link>
           </Button>
         </div>
