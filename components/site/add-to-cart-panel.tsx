@@ -49,7 +49,7 @@ export function AddToCartPanel(props: AddToCartPanelProps) {
       />
       <Button
         size="lg"
-        className="flex-1"
+        className="sm:flex-1"
         onClick={handleAdd}
         disabled={outOfStock}
       >
