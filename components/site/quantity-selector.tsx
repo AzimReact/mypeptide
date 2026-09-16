@@ -9,18 +9,21 @@ export function QuantitySelector({
   min = 1,
   max = 99,
   size = "md",
+  className,
 }: {
   value: number;
   onChange: (value: number) => void;
   min?: number;
   max?: number;
   size?: "sm" | "md";
+  className?: string;
 }) {
   return (
     <div
       className={cn(
         "inline-flex items-center border border-line-strong",
-        size === "sm" ? "h-9" : "h-11"
+        size === "sm" ? "h-9" : "h-11",
+        className
       )}
     >
       <button

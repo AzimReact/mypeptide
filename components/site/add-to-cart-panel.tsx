@@ -43,6 +43,7 @@ export function AddToCartPanel(props: AddToCartPanelProps) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
       <QuantitySelector
+        className="self-start"
         value={quantity}
         onChange={setQuantity}
         max={Math.max(props.stock, 1)}
