@@ -15,17 +15,17 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 6 0 obj
-<< /Length 451 >>
+<< /Length 406 >>
 stream
-BT /F2 16 Tf 72 740 Td (Safety Data Sheet - AX-4420 Research Compound) Tj ET
+BT /F2 16 Tf 72 740 Td (Certificate of Analysis - Selank) Tj ET
 BT /F1 11 Tf 72 704 Td
-(SKU: AX-4420-5) Tj
-0 -18 Td (For laboratory / research use only.) Tj
-0 -18 Td (Not for human or veterinary use.) Tj
-0 -18 Td (Handle using standard laboratory PPE and procedures.) Tj
+(SKU: SLK-10MG) Tj
+0 -18 Td (Batch: LOT-65826) Tj
+0 -18 Td (Test method: HPLC / Mass Spectrometry) Tj
+0 -18 Td (Result: Conforms to specification) Tj
 0 -18 Td () Tj
 0 -18 Td (This document is a placeholder generated for demonstration) Tj
-0 -18 Td (purposes only and does not represent a real safety data sheet.) Tj
+0 -18 Td (purposes only and does not represent a real laboratory analysis.) Tj
 ET
 endstream
 endobj
@@ -41,5 +41,5 @@ xref
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-898
+853
 %%EOF

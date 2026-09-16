@@ -35,6 +35,8 @@ interface ProductSeed {
   active: boolean;
   featured: boolean;
   fillLevel: number;
+  /** Use a pre-placed real photo at /uploads/products/<slug>.jpg instead of generated art. */
+  realImage?: boolean;
 }
 
 const categories: CategorySeed[] = [
@@ -75,95 +77,101 @@ const baseSpecs = (overrides: Record<string, string> = {}) => [
 
 const products: ProductSeed[] = [
   {
-    name: "AX-1102 Research Compound",
-    slug: "ax-1102-research-compound",
-    sku: "AX-1102-5",
+    name: "BPC-157",
+    slug: "bpc-157",
+    sku: "BPC157-5MG",
     price: 8900,
     categorySlug: "peptide-compounds",
-    shortDescription: "5mg lyophilized reference compound for in-vitro research.",
+    shortDescription: "5mg lyophilized reference peptide for in-vitro research.",
     description:
-      "AX-1102 is a lyophilized reference compound manufactured for laboratory research applications. Each batch is synthesized under controlled conditions and independently verified for purity prior to release. Supplied as a single-use vial, intended strictly for qualified research use.",
-    specifications: baseSpecs({ mw: "1,048.2 g/mol" }),
+      "BPC-157 is supplied as a lyophilized powder manufactured for laboratory research applications. Each batch is synthesized under controlled conditions and independently verified for purity prior to release. Supplied as a single-use vial, intended strictly for qualified research use.",
+    specifications: baseSpecs({ mw: "1,419.5 g/mol" }),
     stock: 42,
     active: true,
     featured: true,
     fillLevel: 0.6,
+    realImage: true,
   },
   {
-    name: "AX-1140 Research Compound",
-    slug: "ax-1140-research-compound",
-    sku: "AX-1140-10",
+    name: "TB-500",
+    slug: "tb-500",
+    sku: "TB500-5MG",
     price: 12900,
     categorySlug: "peptide-compounds",
-    shortDescription: "10mg lyophilized reference compound, high-purity synthesis.",
+    shortDescription: "5mg reference peptide, high-purity synthesis.",
     description:
-      "AX-1140 is produced via solid-phase synthesis and finished as a lyophilized powder for research stability. Documentation for each lot, including chromatography summaries, is available on request for verification purposes.",
-    specifications: baseSpecs({ mw: "1,419.6 g/mol" }),
+      "TB-500 is produced via solid-phase synthesis and finished as a lyophilized powder for research stability. Documentation for each lot, including chromatography summaries, is available on request for verification purposes.",
+    specifications: baseSpecs({ mw: "4,963.5 g/mol" }),
     stock: 30,
     active: true,
     featured: true,
     fillLevel: 0.72,
+    realImage: true,
   },
   {
-    name: "AX-2207 Research Compound",
-    slug: "ax-2207-research-compound",
-    sku: "AX-2207-5",
+    name: "Ipamorelin",
+    slug: "ipamorelin",
+    sku: "IPA-5MG",
     price: 9900,
     categorySlug: "peptide-compounds",
-    shortDescription: "5mg reference compound with independent batch verification.",
+    shortDescription: "5mg reference peptide with independent batch verification.",
     description:
-      "AX-2207 is formulated for laboratory reference use and shipped with cold-chain packaging recommendations. Every production lot is assigned a traceable batch number tied to its analytical documentation.",
-    specifications: baseSpecs({ mw: "962.1 g/mol" }),
+      "Ipamorelin is formulated for laboratory reference use and shipped with cold-chain packaging recommendations. Every production lot is assigned a traceable batch number tied to its analytical documentation.",
+    specifications: baseSpecs({ mw: "711.9 g/mol" }),
     stock: 25,
     active: true,
     featured: false,
     fillLevel: 0.55,
+    realImage: true,
   },
   {
-    name: "AX-2290 Research Compound",
-    slug: "ax-2290-research-compound",
-    sku: "AX-2290-10",
+    name: "CJC-1295",
+    slug: "cjc-1295",
+    sku: "CJC1295-2MG",
     price: 14900,
     compareAtPrice: 16900,
     categorySlug: "peptide-compounds",
-    shortDescription: "10mg high-purity compound for comparative research studies.",
+    shortDescription: "2mg high-purity compound for comparative research studies.",
     description:
-      "AX-2290 is a higher-yield formulation intended for extended research protocols requiring larger reference quantities. Purity is confirmed through independent HPLC analysis prior to batch release.",
-    specifications: baseSpecs({ mw: "1,588.9 g/mol", purity: "≥ 99%" }),
+      "CJC-1295 is a higher-yield formulation intended for extended research protocols requiring larger reference quantities. Purity is confirmed through independent HPLC analysis prior to batch release.",
+    specifications: baseSpecs({ mw: "3,367.9 g/mol", purity: "≥ 99%" }),
     stock: 18,
     active: true,
     featured: true,
     fillLevel: 0.8,
+    realImage: true,
   },
   {
-    name: "AX-3315 Research Compound",
-    slug: "ax-3315-research-compound",
-    sku: "AX-3315-2",
+    name: "Semax",
+    slug: "semax",
+    sku: "SMX-10MG",
     price: 6900,
     categorySlug: "peptide-compounds",
-    shortDescription: "2mg compact reference compound, ideal for pilot studies.",
+    shortDescription: "10mg compact reference peptide, ideal for pilot studies.",
     description:
-      "AX-3315 is packaged in a compact 2mg format suited for pilot-scale research and assay development. Like all Axiom Research compounds, it ships with lot-specific documentation available for download.",
-    specifications: baseSpecs({ mw: "845.7 g/mol" }),
+      "Semax is packaged in a compact format suited for pilot-scale research and assay development. Like all catalog compounds, it ships with lot-specific documentation available for download.",
+    specifications: baseSpecs({ mw: "813.9 g/mol" }),
     stock: 60,
     active: true,
     featured: false,
     fillLevel: 0.4,
+    realImage: true,
   },
   {
-    name: "AX-4420 Research Compound",
-    slug: "ax-4420-research-compound",
-    sku: "AX-4420-5",
+    name: "Selank",
+    slug: "selank",
+    sku: "SLK-10MG",
     price: 10900,
     categorySlug: "peptide-compounds",
-    shortDescription: "5mg reference compound with extended stability profile.",
+    shortDescription: "10mg reference peptide with extended stability profile.",
     description:
-      "AX-4420 has been formulated with a focus on shelf stability under standard laboratory freezer conditions. Recommended for research teams running multi-week comparative protocols.",
-    specifications: baseSpecs({ mw: "1,132.5 g/mol" }),
+      "Selank has been formulated with a focus on shelf stability under standard laboratory freezer conditions. Recommended for research teams running multi-week comparative protocols.",
+    specifications: baseSpecs({ mw: "751.9 g/mol" }),
     stock: 8,
     active: true,
     featured: false,
     fillLevel: 0.5,
+    realImage: true,
   },
   {
     name: "RC-410 Buffer Solution",
@@ -344,7 +352,9 @@ async function main() {
     const categoryId = categoryRecords.get(product.categorySlug);
     if (!categoryId) throw new Error(`Unknown category slug: ${product.categorySlug}`);
 
-    const imageUrl = await writeProductArt(product.slug, product.sku, index, product.fillLevel);
+    const imageUrl = product.realImage
+      ? `/uploads/products/${product.slug}.jpg`
+      : await writeProductArt(product.slug, product.sku, index, product.fillLevel);
     const documents = await writeProductDocuments(product.slug, product.name, product.sku);
 
     await prisma.product.upsert({
