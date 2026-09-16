@@ -81,7 +81,7 @@ export default async function HomePage() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
+              <Button asChild variant="outline" size="lg" className="whitespace-normal text-center">
                 <Link href="/quality">Explore Our Quality Standard</Link>
               </Button>
             </div>
@@ -207,7 +207,7 @@ export default async function HomePage() {
               every product page — not locked behind a request form. Review
               batch testing data before you ever add an item to cart.
             </p>
-            <Button asChild variant="accent" size="lg" className="mt-8">
+            <Button asChild variant="accent" size="lg" className="mt-8 whitespace-normal text-center">
               <Link href="/quality">View Our Documentation Standard</Link>
             </Button>
           </div>
