@@ -1,0 +1,55 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eee7d8" />
+      <stop offset="100%" stop-color="#d9cba0" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)" />
+  <circle cx="90" cy="90" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="220" cy="90" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="350" cy="90" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="480" cy="90" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="610" cy="90" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="740" cy="90" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="90" cy="220" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="220" cy="220" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="350" cy="220" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="480" cy="220" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="610" cy="220" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="740" cy="220" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="90" cy="350" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="220" cy="350" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="350" cy="350" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="480" cy="350" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="610" cy="350" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="740" cy="350" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="90" cy="480" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="220" cy="480" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="350" cy="480" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="480" cy="480" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="610" cy="480" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="740" cy="480" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="90" cy="610" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="220" cy="610" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="350" cy="610" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="480" cy="610" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="610" cy="610" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="740" cy="610" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="90" cy="740" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="220" cy="740" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="350" cy="740" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="480" cy="740" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="610" cy="740" r="1.6" fill="#17160f" opacity="0.06" />
+  <circle cx="740" cy="740" r="1.6" fill="#17160f" opacity="0.06" />
+  <g transform="translate(400,470)" fill="none" stroke="#17160f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M -30 -195 L -30 -222 L 30 -222 L 30 -195" />
+    <rect x="-52" y="-195" width="104" height="300" rx="16" fill="#faf8f2" />
+    <line x1="-52" y1="-98.00000000000001" x2="52" y2="-98.00000000000001" stroke="#a8642c" stroke-width="2" stroke-dasharray="1 6" />
+    <rect x="-52" y="-98.00000000000001" width="104" height="203" rx="0" fill="#a8642c" opacity="0.08" stroke="none" />
+    <line x1="-30" y1="-222" x2="-30" y2="-195" />
+    <line x1="30" y1="-222" x2="30" y2="-195" />
+  </g>
+  <text x="400" y="845" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="22" letter-spacing="6" fill="#17160f" opacity="0.5">AX-2290-10</text>
+  <text x="400" y="878" text-anchor="middle" font-family="ui-sans-serif, sans-serif" font-size="11" letter-spacing="4" fill="#17160f" opacity="0.32">AXIOM RESEARCH</text>
+</svg>

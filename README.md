@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Axiom Research
+
+A premium research-compound e-commerce **MVP/demo** built with Next.js, Prisma, and SQLite. It demonstrates a full storefront (catalog, cart, checkout, mock crypto payment, order tracking) and an admin panel (products, categories, orders) using an intentionally simple local stack — no external database, auth provider, storage, or payment processor.
+
+> **This is a demo, not a production deployment.** See [Production Migration Notes](#production-migration-notes) before shipping this anywhere real.
+
+## Tech Stack
+
+- **Next.js 16** (App Router, Server Actions, Turbopack)
+- **TypeScript**
+- **Tailwind CSS v4**
+- **Prisma 6 + SQLite** — local file database, zero external services
+- **Zod** — input validation
+- **React Hook Form** — form state
+- **Radix UI primitives** — accessible dialogs, selects, tabs, etc. (hand-styled, not a component library)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
+npx prisma migrate dev   # creates prisma/dev.db and applies the schema
+npm run db:seed          # seeds categories, 12 demo products, and the admin user
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> `npx prisma migrate dev` runs the seed automatically the first time. `npm run db:seed` re-runs it any time (safe to re-run — it upserts).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Environment Variables
 
-## Learn More
+Copy `.env.example` to `.env` (already present locally) and adjust as needed:
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Purpose |
+|---|---|
+| `DATABASE_URL` | SQLite file path, e.g. `file:./dev.db` |
+| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Seeded admin login (also read at seed time to create the admin user) |
+| `SESSION_SECRET` | HMAC secret signing the admin session cookie — replace for anything beyond local dev |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Demo Admin Login
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+URL:      /admin/login
+Email:    admin@veridianlabs.demo   (or your ADMIN_EMAIL)
+Password: ChangeMe!2024             (or your ADMIN_PASSWORD)
+```
 
-## Deploy on Vercel
+## Available Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Script | What it does |
+|---|---|
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run start` | Run the production build |
+| `npm run lint` | ESLint |
+| `npm run db:seed` | Re-seed demo data (categories, products, admin user) |
+| `npm run db:reset` | Drop, re-migrate, and re-seed the database (destructive — local dev only) |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+app/
+  (site)/            Public storefront — home, shop, product, cart, checkout,
+                      crypto payment, order success, track order, legal pages
+  admin/
+    (auth)/login/    Admin login (no sidebar chrome)
+    (dashboard)/     Guarded admin app — dashboard, products, categories, orders
+  sitemap.ts, robots.ts
+components/
+  ui/                Hand-built primitives (button, dialog, sheet, select, table, ...)
+  site/              Storefront components (header, cart drawer, product card, ...)
+  admin/             Admin components (shell/sidebar, forms, tables)
+lib/
+  payments/          Provider-agnostic payment architecture (see below)
+  validation/        Zod schemas
+  data/               Read-only Prisma query helpers used by pages
+  db.ts              Prisma client singleton
+  auth.ts            Admin session (signed cookie, no external auth service)
+  storage.ts         Local filesystem upload handling
+  qr.ts, pdf.ts      QR code + placeholder PDF generation for the demo
+prisma/
+  schema.prisma
+  seed.ts            Demo categories/products/admin user + generated placeholder
+                      product art (SVG) and COA/SDS documents (PDF)
+public/uploads/
+  products/          Product images (generated by the seed script)
+  documents/         COA/SDS PDFs (generated by the seed script)
+```
+
+## Local File Storage
+
+Product images and COA/SDS documents are written to `public/uploads/products` and `public/uploads/documents` on the local filesystem (see `lib/storage.ts`). This is used only for the MVP/demo. **Production deployment should use persistent object storage** (e.g. S3-compatible storage) — local disk storage does not survive redeploys on most hosting platforms.
+
+## Mock Crypto Payment
+
+Checkout ends on `/checkout/payment/[orderId]`, a crypto payment screen (currency selector, QR code, wallet address, countdown, live status). This is backed by a small, swappable payment architecture:
+
+- `lib/payments/payment-provider.ts` — the `PaymentProvider` interface (`createPayment`, `getPaymentStatus`) that all UI and checkout code depends on.
+- `lib/payments/mock-crypto-provider.ts` — `MockCryptoPaymentProvider`, the only implementation in this project. It simulates `pending → confirming → paid` (plus `failed`/`expired`) using fixed demo exchange rates and fake wallet addresses, entirely inside the local database — **no real blockchain transaction occurs**.
+- `lib/payments/index.ts` — `getPaymentProvider()`, the single factory function everything else calls. Swapping in a real provider later means implementing `PaymentProvider` in a new file and changing this one function — no UI or checkout code needs to change.
+
+**Production crypto payment integration is intentionally mocked in this MVP.** A real payment provider must be selected and verified for the client's jurisdiction and business/product category before production implementation.
+
+## Server-Side Price Calculation
+
+Checkout never trusts prices, quantities, or stock sent from the browser. `app/(site)/checkout/actions.ts` accepts only `{ productId, quantity }` pairs from the client, re-reads each product from SQLite, revalidates stock, and recalculates the subtotal/shipping/total from the database before creating the order. Stock is decremented only once a payment actually settles to `paid` (see `mock-crypto-provider.ts`), not at checkout time — so abandoned/expired payments don't lock up inventory.
+
+## Admin Authentication
+
+There is no external auth provider. `lib/auth.ts` implements a minimal signed-cookie session: on login, credentials are checked against the `User` table (bcrypt-hashed password), and a session cookie is signed with `SESSION_SECRET` (HMAC-SHA256). Every `/admin/*` route under the `(dashboard)` group is guarded server-side in `app/admin/(dashboard)/layout.tsx` — there is no client-side-only protection.
+
+## Legal Pages
+
+`/terms`, `/privacy`, `/shipping`, `/refund` contain clearly marked **placeholder** legal copy. **Final legal text must be supplied and reviewed by the client or their legal counsel** before this project is used for anything beyond an internal demo.
+
+## Production Migration Notes
+
+This MVP intentionally avoids external infrastructure. Before any production deployment:
+
+- **Database**: migrate from SQLite to a managed Postgres (or similar) database. The Prisma schema is written to be provider-agnostic; only the `datasource` block and a fresh migration history would need to change.
+- **File storage**: replace `lib/storage.ts`'s local filesystem writes with persistent object storage.
+- **Authentication**: the current signed-cookie admin session is adequate for a single demo admin account; a real deployment with multiple staff accounts should use a proper auth provider or at least add rate limiting, audit logging, and password reset flows.
+- **Payments**: replace the mock crypto provider with a real, jurisdiction-appropriate payment integration (see above).
+- **Legal**: replace all placeholder legal page copy.
+- **Email**: there is no transactional email in this MVP (order confirmations, etc. are shown on-screen only) — add an email provider if needed.
